@@ -1,0 +1,70 @@
+<nav [ngClass]="{'sidebar-collapsed': isCollapsed}" class="sidebar">
+  <!-- Logo Section -->
+  <div class="sidebar-header">
+    <div class="logo-container">
+      <h1 class="logo-text">
+        <div class="logo-section">
+  
+</div>
+        <span class="logo-yoco">YOCO</span>
+        <span class="logo-stays">stays</span>
+      </h1>
+    </div>
+    <button mat-icon-button class="toggle-btn" (click)="onToggleSidebar()">
+      <mat-icon>{{isCollapsed ? 'chevron_right' : 'chevron_left'}}</mat-icon>
+    </button>
+  </div>
+
+  <!-- Navigation Menu -->
+  <div class="sidebar-menu">
+    <ul class="nav-menu">
+      <!-- Dashboard -->
+      <li class="nav-item" [class.active]="menuItems[0].isActive">
+        <a class="nav-link" (click)="onMenuItemClick('dashboard')">
+          <mat-icon class="nav-icon">dashboard</mat-icon>
+          <span class="nav-text">Dashboard</span>
+        </a>
+      </li>
+
+      <!-- Reports & Analytics -->
+      <li class="nav-item" [class.active]="menuItems[1].isActive">
+        <a class="nav-link" (click)="onMenuItemClick('reports')">
+          <mat-icon class="nav-icon">assessment</mat-icon>
+          <span class="nav-text">Reports & Analytics</span>
+        </a>
+      </li>
+
+      <!-- Users with Submenu -->
+      <li class="nav-item has-submenu" [class.active]="menuItems[2].isActive" [class.expanded]="expandedMenu === 'users'">
+        <a class="nav-link" (click)="toggleSubMenu('users')">
+          <mat-icon class="nav-icon">people</mat-icon>
+          <span class="nav-text">Users</span>
+          <mat-icon class="submenu-arrow">{{expandedMenu === 'users' ? 'expand_less' : 'expand_more'}}</mat-icon>
+        </a>
+        
+        <!-- Submenu Items -->
+        <ul class="submenu" *ngIf="expandedMenu === 'users'">
+          <li *ngFor="let subItem of menuItems[2].subItems" class="submenu-item">
+            <a class="submenu-link" (click)="onMenuItemClick(subItem.id)">
+              <mat-icon class="submenu-icon">{{subItem.icon}}</mat-icon>
+              <span class="submenu-text">{{subItem.name}}</span>
+            </a>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Sidebar Footer -->
+  <div class="sidebar-footer">
+    <div class="user-profile">
+      <div class="user-avatar">
+        <mat-icon>account_circle</mat-icon>
+      </div>
+      <div class="user-info" *ngIf="!isCollapsed">
+        <h6 class="user-name">Admin</h6>
+        <span class="user-role">Super Admin</span>
+      </div>
+    </div>
+  </div>
+</nav>

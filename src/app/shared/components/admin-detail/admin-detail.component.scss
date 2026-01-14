@@ -1,0 +1,416 @@
+// .admin-details-modal {
+//   // This component is designed to be used in a dialog
+// }
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1100;
+  padding: 20px;
+  animation: fadeIn 0.3s ease;
+}
+
+.modal-container {
+  background: white;
+  border-radius: 12px;
+  width: 100%;
+  max-width: 900px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  animation: slideUp 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// Modal Header
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24px;
+  border-bottom: 1px solid #e9ecef;
+  background: #f8f9fa;
+  border-radius: 12px 12px 0 0;
+  
+  .header-left {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    
+    .back-btn {
+      color: #6c757d;
+      background: white;
+      border: 1px solid #dee2e6;
+      
+      &:hover {
+        background: #f8f9fa;
+      }
+    }
+    
+    .modal-title {
+      font-size: 24px;
+      font-weight: 600;
+      color: #343a40;
+      margin: 0;
+    }
+  }
+  
+  .header-actions {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    
+    .action-btn {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 16px;
+      border-radius: 6px;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      
+      mat-icon {
+        font-size: 18px;
+        width: 18px;
+        height: 18px;
+      }
+      
+      &.edit-btn {
+        border-color: #007bff;
+        color: #007bff;
+        
+        &:hover {
+          background: rgba(0, 123, 255, 0.1);
+        }
+      }
+      
+      &.inactive-btn {
+        border-color: #6c757d;
+        color: #6c757d;
+        
+        &:hover {
+          background: rgba(108, 117, 125, 0.1);
+        }
+      }
+      
+      &.export-btn {
+        border-color: #28a745;
+        color: #28a745;
+        
+        &:hover {
+          background: rgba(40, 167, 69, 0.1);
+        }
+      }
+      
+      &.report-btn {
+        border-color: #17a2b8;
+        color: #17a2b8;
+        
+        &:hover {
+          background: rgba(23, 162, 184, 0.1);
+        }
+      }
+      
+      &.details-btn {
+        border-color: #6c757d;
+        color: #6c757d;
+        
+        &:hover {
+          background: rgba(108, 117, 125, 0.1);
+        }
+      }
+    }
+  }
+}
+
+// Modal Body
+.modal-body {
+  padding: 32px;
+}
+
+// Admin Profile
+.admin-profile {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  margin-bottom: 32px;
+  
+  .profile-avatar {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #1a237e 0%, #283593 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: 600;
+    font-size: 24px;
+  }
+  
+  .profile-info {
+    .admin-name {
+      font-size: 32px;
+      font-weight: 700;
+      color: #212529;
+      margin: 0 0 8px 0;
+      line-height: 1.2;
+    }
+    
+    .admin-id {
+      font-size: 18px;
+      color: #6c757d;
+      margin: 0;
+    }
+  }
+}
+
+// Details Section
+.details-section {
+  margin-bottom: 32px;
+  
+  .details-list {
+    .detail-item {
+      display: flex;
+      align-items: flex-start;
+      margin-bottom: 24px;
+      padding-bottom: 24px;
+      border-bottom: 1px solid #f1f3f4;
+      
+      &:last-child {
+        border-bottom: none;
+        margin-bottom: 0;
+        padding-bottom: 0;
+      }
+      
+      .detail-icon {
+        color: #1a237e;
+        margin-right: 16px;
+        margin-top: 2px;
+        font-size: 22px;
+        width: 22px;
+        height: 22px;
+      }
+      
+      .detail-content {
+        flex: 1;
+        
+        .detail-label {
+          display: block;
+          font-size: 14px;
+          color: #6c757d;
+          margin-bottom: 4px;
+          font-weight: 500;
+        }
+        
+        .detail-value {
+          font-size: 16px;
+          color: #212529;
+          margin: 0;
+          line-height: 1.5;
+        }
+      }
+    }
+  }
+}
+
+// Divider
+.divider {
+  height: 1px;
+  background: linear-gradient(to right, transparent, #dee2e6, transparent);
+  margin: 32px 0;
+}
+
+// KYC Section
+.kyc-section {
+  .section-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 20px;
+    font-weight: 600;
+    color: #343a40;
+    margin: 0 0 24px 0;
+    
+    mat-icon {
+      color: #1a237e;
+      font-size: 24px;
+    }
+  }
+  
+  .upload-area {
+    border: 2px dashed #adb5bd;
+    border-radius: 12px;
+    padding: 48px 32px;
+    text-align: center;
+    cursor: pointer;
+    background: #f8f9fa;
+    margin-bottom: 24px;
+    transition: all 0.3s ease;
+    
+    &:hover {
+      border-color: #1a237e;
+      background: #f1f3f9;
+    }
+    
+    .upload-icon {
+      font-size: 64px;
+      width: 64px;
+      height: 64px;
+      color: #adb5bd;
+      margin-bottom: 20px;
+      display: block;
+      margin: 0 auto 20px;
+    }
+    
+    .upload-text {
+      font-size: 18px;
+      font-weight: 500;
+      color: #495057;
+      margin-bottom: 8px;
+    }
+    
+    .upload-subtext {
+      font-size: 14px;
+      color: #6c757d;
+    }
+  }
+  
+  .uploaded-files {
+    margin-bottom: 24px;
+    
+    .uploaded-file {
+      display: flex;
+      align-items: center;
+      padding: 16px;
+      background: white;
+      border: 1px solid #dee2e6;
+      border-radius: 8px;
+      margin-bottom: 12px;
+      
+      &:last-child {
+        margin-bottom: 0;
+      }
+      
+      .file-icon {
+        color: #1a237e;
+        margin-right: 16px;
+        font-size: 24px;
+      }
+      
+      .file-info {
+        flex: 1;
+        
+        .file-name {
+          font-size: 14px;
+          font-weight: 500;
+          color: #343a40;
+          margin-bottom: 4px;
+        }
+        
+        .file-size {
+          font-size: 12px;
+          color: #6c757d;
+        }
+      }
+      
+      .remove-btn {
+        color: #6c757d;
+        
+        &:hover {
+          color: #dc3545;
+          background: rgba(220, 53, 69, 0.1);
+        }
+      }
+    }
+  }
+  
+  .upload-btn {
+    width: 100%;
+    padding: 16px;
+    background: linear-gradient(135deg, #1a237e 0%, #283593 100%);
+    color: white;
+    font-size: 16px;
+    font-weight: 500;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    
+    &:hover {
+      background: linear-gradient(135deg, #283593 0%, #3949ab 100%);
+      box-shadow: 0 4px 15px rgba(26, 35, 126, 0.3);
+    }
+    
+    &:disabled {
+      background: #adb5bd;
+      cursor: not-allowed;
+    }
+    
+    mat-icon {
+      font-size: 20px;
+    }
+  }
+}
+
+// Responsive Design
+@media (max-width: 768px) {
+  .modal-header {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 16px;
+    padding: 16px;
+    
+    .header-left {
+      justify-content: space-between;
+    }
+    
+    .header-actions {
+      justify-content: center;
+      
+      .action-btn {
+        flex: 1;
+        min-width: calc(50% - 6px);
+      }
+    }
+  }
+  
+  .modal-body {
+    padding: 20px;
+  }
+  
+  .admin-profile {
+    flex-direction: column;
+    text-align: center;
+    gap: 16px;
+  }
+  
+  .upload-area {
+    padding: 32px 16px;
+  }
+}

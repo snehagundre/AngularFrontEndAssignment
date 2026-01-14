@@ -1,0 +1,269 @@
+.sidebar {
+  width: var(--sidebar-width);
+  background: linear-gradient(180deg, var(--primary-color) 0%, var(--primary-light) 100%);
+  color: white;
+  height: 100vh;
+  position: fixed;
+  overflow-y: auto;
+  transition: all 0.3s ease;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+
+  &.sidebar-collapsed {
+    width: var(--sidebar-collapsed);
+    
+    .nav-text,
+    .logo-text,
+    .user-info,
+    .submenu-arrow {
+      display: none;
+    }
+    
+    .logo-container {
+      justify-content: center;
+    }
+  }
+}
+
+.sidebar-header {
+  padding: 24px 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+}
+
+.logo-text {
+  font-size: 24px;
+  font-weight: 700;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+}
+.logo-img {
+  max-width: 60px;
+  max-height: 60px;
+  height: auto;
+  width: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 4px rgba(106, 75, 195, 0.2));
+}
+
+.logo-yoco {
+  color: white;
+  letter-spacing: 1px;
+}
+
+.logo-stays {
+  color: var(--secondary-color);
+  font-weight: 400;
+  font-size: 20px;
+}
+
+.toggle-btn {
+  color: white !important;
+  background: rgba(255, 255, 255, 0.1) !important;
+  
+  &:hover {
+    background: rgba(255, 255, 255, 0.2) !important;
+  }
+}
+
+.sidebar-menu {
+  flex: 1;
+  padding: 20px 0;
+  overflow-y: auto;
+}
+
+.nav-menu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.nav-item {
+  margin: 4px 16px;
+  border-radius: 8px;
+  overflow: hidden;
+  transition: all 0.2s ease;
+  
+  &.active {
+    background: rgba(255, 255, 255, 0.15);
+    
+    .nav-link {
+      .nav-icon {
+        color: var(--secondary-color);
+      }
+      .nav-text {
+        font-weight: 600;
+      }
+    }
+  }
+  
+  &:hover:not(.active) {
+    background: rgba(255, 255, 255, 0.05);
+  }
+  
+  &.has-submenu {
+    .nav-link {
+      cursor: pointer;
+    }
+  }
+}
+
+.nav-link {
+  display: flex;
+  align-items: center;
+  padding: 12px 16px;
+  color: rgba(255, 255, 255, 0.85);
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  
+  &:hover {
+    color: white;
+  }
+}
+
+.nav-icon {
+  margin-right: 12px;
+  font-size: 22px;
+  width: 22px;
+  height: 22px;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.nav-text {
+  flex: 1;
+  font-size: 15px;
+  font-weight: 400;
+  white-space: nowrap;
+}
+
+.submenu-arrow {
+  font-size: 20px;
+  width: 20px;
+  height: 20px;
+  color: rgba(255, 255, 255, 0.5);
+  transition: transform 0.3s ease;
+}
+
+.submenu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 0 0 8px 8px;
+  overflow: hidden;
+}
+
+.submenu-item {
+  &:last-child {
+    .submenu-link {
+      border-bottom: none;
+    }
+  }
+}
+
+.submenu-link {
+  display: flex;
+  align-items: center;
+  padding: 10px 16px 10px 48px;
+  color: rgba(255, 255, 255, 0.7);
+  text-decoration: none;
+  cursor: pointer;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  transition: all 0.2s ease;
+  
+  &:hover {
+    color: white;
+    background: rgba(255, 255, 255, 0.05);
+  }
+}
+
+.submenu-icon {
+  margin-right: 12px;
+  font-size: 18px;
+  width: 18px;
+  height: 18px;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.submenu-text {
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.sidebar-footer {
+  padding: 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.user-profile {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.user-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  mat-icon {
+    color: white;
+    font-size: 24px;
+  }
+}
+
+.user-info {
+  flex: 1;
+  overflow: hidden;
+}
+
+.user-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: white;
+  margin: 0 0 2px 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.user-role {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+// Responsive Styles
+@media (max-width: 768px) {
+  .sidebar {
+    transform: translateX(-100%);
+    z-index: 1050;
+    
+    &.sidebar-open {
+      transform: translateX(0);
+    }
+    
+    &.sidebar-collapsed {
+      width: var(--sidebar-width);
+      
+      .nav-text,
+      .user-info {
+        display: block;
+      }
+    }
+  }
+}

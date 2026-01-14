@@ -1,0 +1,158 @@
+<div class="create-staff-modal">
+  <div class="modal-header">
+    <div class="header-left">
+      <button mat-icon-button class="back-btn" (click)="onCancel()">
+        <mat-icon>arrow_back</mat-icon>
+      </button>
+      <h2 class="modal-title">Create Staff</h2>
+    </div>
+  </div>
+
+  <div class="modal-body">
+    <form [formGroup]="staffForm" (ngSubmit)="onSubmit()">
+      <div class="form-section">
+        <h3 class="section-title">Personal Information</h3>
+        
+        <!-- Role Selection -->
+        <div class="form-group">
+          <label class="form-label required">Your Role</label>
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-select formControlName="role" placeholder="Select Role">
+              <mat-option *ngFor="let role of roles" [value]="role.value">
+                <mat-icon class="option-icon">{{role.icon}}</mat-icon>
+                {{role.label}}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="getFormControl('role')?.hasError('required')">
+              Role is required
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <!-- Username -->
+        <div class="form-group">
+          <label class="form-label required">User Name</label>
+          <mat-form-field appearance="outline" class="full-width">
+            <input matInput formControlName="username" placeholder="Type Here">
+            <mat-error *ngIf="getFormControl('username')?.hasError('required')">
+              Username is required
+            </mat-error>
+            <mat-error *ngIf="getFormControl('username')?.hasError('minlength')">
+              Username must be at least 3 characters
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <!-- Password -->
+        <div class="form-group">
+          <label class="form-label required">Password</label>
+          <mat-form-field appearance="outline" class="full-width">
+            <input matInput type="password" formControlName="password" placeholder="Type Here">
+            <mat-error *ngIf="getFormControl('password')?.hasError('required')">
+              Password is required
+            </mat-error>
+            <mat-error *ngIf="getFormControl('password')?.hasError('minlength')">
+              Password must be at least 6 characters
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <!-- Phone Number -->
+        <div class="form-group">
+          <label class="form-label required">Phone Number</label>
+          <mat-form-field appearance="outline" class="full-width">
+            <span matPrefix>+91 &nbsp;</span>
+            <input matInput formControlName="phoneNumber" placeholder="Enter phone number">
+            <mat-error *ngIf="getFormControl('phoneNumber')?.hasError('required')">
+              Phone number is required
+            </mat-error>
+            <mat-error *ngIf="getFormControl('phoneNumber')?.hasError('pattern')">
+              Please enter a valid phone number
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <!-- Date of Birth -->
+        <div class="form-group">
+          <label class="form-label required">Date of Birth</label>
+          <mat-form-field appearance="outline" class="full-width">
+            <input matInput [matDatepicker]="dobPicker" formControlName="dateOfBirth" placeholder="DD/MM/YY">
+            <mat-datepicker-toggle matSuffix [for]="dobPicker"></mat-datepicker-toggle>
+            <mat-datepicker #dobPicker></mat-datepicker>
+            <mat-error *ngIf="getFormControl('dateOfBirth')?.hasError('required')">
+              Date of birth is required
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <!-- Joining Date -->
+        <div class="form-group">
+          <label class="form-label required">Joining Date</label>
+          <mat-form-field appearance="outline" class="full-width">
+            <input matInput [matDatepicker]="joinPicker" formControlName="joiningDate" placeholder="DD/MM/YY">
+            <mat-datepicker-toggle matSuffix [for]="joinPicker"></mat-datepicker-toggle>
+            <mat-datepicker #joinPicker></mat-datepicker>
+            <mat-error *ngIf="getFormControl('joiningDate')?.hasError('required')">
+              Joining date is required
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <!-- Gender -->
+        <div class="form-group">
+          <label class="form-label required">Gender</label>
+          <div class="gender-options">
+            <mat-radio-group formControlName="gender" class="gender-radio-group">
+              <mat-radio-button *ngFor="let gender of genders" [value]="gender.value" class="gender-radio">
+                {{gender.label}}
+              </mat-radio-button>
+            </mat-radio-group>
+          </div>
+          <mat-error *ngIf="getFormControl('gender')?.hasError('required')" class="error-text">
+            Gender is required
+          </mat-error>
+        </div>
+      </div>
+
+      <div class="form-section">
+        <h3 class="section-title">Family Information (Optional)</h3>
+        
+        <!-- Father's Name -->
+        <div class="form-group">
+          <label class="form-label">Father Name</label>
+          <mat-form-field appearance="outline" class="full-width">
+            <input matInput formControlName="fatherName" placeholder="Optional">
+          </mat-form-field>
+        </div>
+
+        <!-- Mother's Name -->
+        <div class="form-group">
+          <label class="form-label">Mother Name</label>
+          <mat-form-field appearance="outline" class="full-width">
+            <input matInput formControlName="motherName" placeholder="Optional">
+          </mat-form-field>
+        </div>
+
+        <!-- Spouse Name -->
+        <div class="form-group">
+          <label class="form-label">Spouse Name</label>
+          <mat-form-field appearance="outline" class="full-width">
+            <input matInput formControlName="spouseName" placeholder="Optional">
+          </mat-form-field>
+        </div>
+      </div>
+
+      <!-- Form Actions -->
+      <div class="form-actions">
+        <button type="button" mat-stroked-button class="cancel-btn" (click)="onCancel()">
+          Cancel
+        </button>
+        <button type="submit" mat-raised-button class="submit-btn" [disabled]="isLoading || staffForm.invalid">
+          <mat-icon *ngIf="!isLoading">person_add</mat-icon>
+          <mat-icon *ngIf="isLoading" class="spinner">autorenew</mat-icon>
+          {{ isLoading ? 'Creating...' : 'Create Staff' }}
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

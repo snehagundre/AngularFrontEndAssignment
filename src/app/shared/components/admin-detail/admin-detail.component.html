@@ -1,0 +1,140 @@
+<div class="admin-details-modal">
+  <!-- Modal Overlay Content -->
+  <div class="modal-overlay" (click)="onClose()">
+    <div class="modal-container" (click)="$event.stopPropagation()">
+      
+      <!-- Header with Back Arrow and Actions -->
+      <div class="modal-header">
+        <div class="header-left">
+          <button mat-icon-button class="back-btn" (click)="goBack()">
+            <mat-icon>arrow_back</mat-icon>
+          </button>
+          <h2 class="modal-title">Admin Details</h2>
+        </div>
+        
+        <div class="header-actions">
+          <button mat-stroked-button class="action-btn edit-btn" (click)="onEdit()">
+            <mat-icon>edit</mat-icon>
+            Edit
+          </button>
+          <button mat-stroked-button class="action-btn inactive-btn" (click)="toggleStatus()">
+            <mat-icon>{{isActive ? 'toggle_on' : 'toggle_off'}}</mat-icon>
+            {{isActive ? 'Active' : 'Inactive'}}
+          </button>
+          <button mat-stroked-button class="action-btn export-btn" (click)="onExport()">
+            <mat-icon>download</mat-icon>
+            Export
+          </button>
+          <button mat-stroked-button class="action-btn report-btn" (click)="generateReport()">
+            <mat-icon>description</mat-icon>
+            Report
+          </button>
+          <button mat-stroked-button class="action-btn details-btn" (click)="showMoreDetails()">
+            <mat-icon>info</mat-icon>
+            Details
+          </button>
+        </div>
+      </div>
+
+      <!-- Modal Body -->
+      <div class="modal-body">
+        <!-- Admin Profile -->
+        <div class="admin-profile">
+          <div class="profile-avatar">
+            <span class="avatar-text">{{ getInitials(user.name) }}</span>
+          </div>
+          <div class="profile-info">
+            <h1 class="admin-name">{{ user.name }}</h1>
+            <p class="admin-id">{{ user.id }}</p>
+          </div>
+        </div>
+
+        <!-- Admin Details List -->
+        <div class="details-section">
+          <div class="details-list">
+            <div class="detail-item">
+              <mat-icon class="detail-icon">phone</mat-icon>
+              <div class="detail-content">
+                <strong class="detail-label">Phone No</strong>
+                <p class="detail-value">{{ user.phone }}</p>
+              </div>
+            </div>
+            
+            <div class="detail-item">
+              <mat-icon class="detail-icon">email</mat-icon>
+              <div class="detail-content">
+                <strong class="detail-label">Email ID</strong>
+                <p class="detail-value">{{ user.email }}</p>
+              </div>
+            </div>
+            
+            <div class="detail-item">
+              <mat-icon class="detail-icon">apartment</mat-icon>
+              <div class="detail-content">
+                <strong class="detail-label">Number of Hostel Assigned</strong>
+                <p class="detail-value">06</p>
+              </div>
+            </div>
+            
+            <div class="detail-item">
+              <mat-icon class="detail-icon">location_city</mat-icon>
+              <div class="detail-content">
+                <strong class="detail-label">Names of Hostels Assigned</strong>
+                <p class="detail-value">Shraddha park | Saikheda | GHRU</p>
+              </div>
+            </div>
+            
+            <div class="detail-item">
+              <mat-icon class="detail-icon">home</mat-icon>
+              <div class="detail-content">
+                <strong class="detail-label">Permanent Address</strong>
+                <p class="detail-value">22/D, Shankar Nagar, Nagpur</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Divider -->
+        <div class="divider"></div>
+
+        <!-- KYC Upload Section -->
+        <div class="kyc-section">
+          <h3 class="section-title">
+            <mat-icon>cloud_upload</mat-icon>
+            Upload KYC Documents
+          </h3>
+          
+          <div class="upload-area" (click)="fileInput.click()">
+            <mat-icon class="upload-icon">cloud_upload</mat-icon>
+            <div class="upload-text">
+              Click to browse or drag and drop files here
+            </div>
+            <div class="upload-subtext">
+              Supported formats: JPG, PNG, PDF (Max 5MB)
+            </div>
+            <input #fileInput type="file" hidden (change)="onFileSelected($event)" accept=".jpg,.jpeg,.png,.pdf">
+          </div>
+          
+          <!-- Uploaded Files List -->
+          <div class="uploaded-files" *ngIf="uploadedFiles.length > 0">
+            <div class="uploaded-file" *ngFor="let file of uploadedFiles; let i = index">
+              <mat-icon class="file-icon">description</mat-icon>
+              <div class="file-info">
+                <div class="file-name">{{ file.name }}</div>
+                <div class="file-size">{{ (file.size / 1024).toFixed(2) }} KB</div>
+              </div>
+              <button mat-icon-button class="remove-btn" (click)="removeFile(i)">
+                <mat-icon>close</mat-icon>
+              </button>
+            </div>
+          </div>
+          
+          <button mat-raised-button class="upload-btn" (click)="uploadKYC()" [disabled]="uploadedFiles.length === 0">
+            <mat-icon>upload</mat-icon>
+            Upload Documents
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

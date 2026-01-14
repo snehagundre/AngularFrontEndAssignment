@@ -1,0 +1,240 @@
+<div class="user-management-page">
+  <!-- Page Header -->
+  <div class="page-header">
+    <div class="header-content">
+      <div class="header-left">
+        <h1 class="page-title">User Management</h1>
+        <p class="page-subtitle">Hi, welcome to User Management</p>
+      </div>
+      <div class="header-right">
+        <div class="search-box">
+          <mat-icon class="search-icon">search</mat-icon>
+          <input
+            type="text"
+            class="search-input"
+            placeholder="Search users..."
+            [(ngModel)]="searchQuery"
+            (input)="onSearch()"
+          >
+        </div>
+        <button mat-raised-button class="add-user-btn" [matMenuTriggerFor]="addUserMenu">
+          <mat-icon>add</mat-icon>
+          Add Users
+        </button>
+        <mat-menu #addUserMenu="matMenu" xPosition="before">
+          <button mat-menu-item (click)="openCreateStaffModal()">
+            <mat-icon>person_add</mat-icon>
+            Add Staff
+          </button>
+          <button mat-menu-item>
+            <mat-icon>school</mat-icon>
+            Add Student
+          </button>
+        </mat-menu>
+      </div>
+    </div>
+  </div>
+
+  <!-- Hostel Info & Stats -->
+  <div class="hostel-info-section">
+    <div class="hostel-card">
+      <h2 class="hostel-name">{{ currentHostel.name }}</h2>
+      <p class="hostel-location">{{ currentHostel.location }}</p>
+      
+      <div class="stats-grid">
+        <div class="stat-item">
+          <div class="stat-icon admin-icon">
+            <mat-icon>admin_panel_settings</mat-icon>
+          </div>
+          <div class="stat-info">
+            <h3 class="stat-value">{{ stats.totalAdmins }}</h3>
+            <p class="stat-label">Hostel Admins</p>
+          </div>
+        </div>
+        
+        <div class="stat-item">
+          <div class="stat-icon staff-icon">
+            <mat-icon>people</mat-icon>
+          </div>
+          <div class="stat-info">
+            <h3 class="stat-value">{{ stats.totalStaff }}</h3>
+            <p class="stat-label">Hostel Staff</p>
+          </div>
+        </div>
+        
+        <div class="stat-item">
+          <div class="stat-icon student-icon">
+            <mat-icon>school</mat-icon>
+          </div>
+          <div class="stat-info">
+            <h3 class="stat-value">{{ stats.totalStudents }}</h3>
+            <p class="stat-label">Hostel Students</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Filter Tabs -->
+  <div class="filter-section">
+    <div class="filter-tabs">
+      <button
+        class="tab-btn"
+        [class.active]="activeTab === 'all'"
+        (click)="setActiveTab('all')"
+      >
+        All Users
+        <span class="tab-badge">{{ users.length }}</span>
+      </button>
+      <button
+        class="tab-btn"
+        [class.active]="activeTab === 'active'"
+        (click)="setActiveTab('active')"
+      >
+        Active
+        <span class="tab-badge">{{ stats.activeUsers }}</span>
+      </button>
+      <button
+        class="tab-btn"
+        [class.active]="activeTab === 'inactive'"
+        (click)="setActiveTab('inactive')"
+      >
+        Inactive
+        <span class="tab-badge">{{ stats.inactiveUsers }}</span>
+      </button>
+    </div>
+    
+    <div class="filter-actions">
+      <button mat-stroked-button class="action-btn" (click)="exportData()">
+        <mat-icon>download</mat-icon>
+        Export
+      </button>
+      <button mat-stroked-button class="action-btn" (click)="generateReport()">
+        <mat-icon>description</mat-icon>
+        Report
+      </button>
+    </div>
+  </div>
+
+  <!-- Loading State -->
+  <div class="loading-state" *ngIf="isLoading">
+    <div class="spinner-container">
+      <div class="spinner"></div>
+      <p>Loading users...</p>
+    </div>
+  </div>
+
+  <!-- Error State -->
+  <div class="error-state" *ngIf="error && !isLoading">
+    <div class="error-content">
+      <mat-icon class="error-icon">error_outline</mat-icon>
+      <div>
+        <h3>Unable to load users</h3>
+        <p>{{ error }}</p>
+        <button mat-button class="retry-btn" (click)="loadUsers()">
+          <mat-icon>refresh</mat-icon>
+          Try Again
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Users List -->
+  <div class="users-section" *ngIf="!isLoading && !error">
+    <!-- Role Filter -->
+    <div class="role-filter">
+      <button
+        class="role-btn"
+        [class.active]="selectedRole === 'all'"
+        (click)="setRoleFilter('all')"
+      >
+        All
+      </button>
+      <button
+        class="role-btn"
+        [class.active]="selectedRole === 'admin'"
+        (click)="setRoleFilter('admin')"
+      >
+        Admins
+      </button>
+      <button
+        class="role-btn"
+        [class.active]="selectedRole === 'staff'"
+        (click)="setRoleFilter('staff')"
+      >
+        Staff
+      </button>
+      <button
+        class="role-btn"
+        [class.active]="selectedRole === 'student'"
+        (click)="setRoleFilter('student')"
+      >
+        Students
+      </button>
+    </div>
+
+    <!-- Users Grid -->
+    <div class="users-grid" *ngIf="filteredUsers.length > 0">
+      <div class="user-card" *ngFor="let user of filteredUsers">
+        <div class="user-card-header">
+          <div class="user-avatar">
+            <span class="avatar-text">{{ getInitials(user.name) }}</span>
+          </div>
+          <div class="user-status" [class.active]="user.status === 'active'">
+            {{ user.status === 'active' ? 'Active' : 'Inactive' }}
+          </div>
+        </div>
+        
+        <div class="user-card-body">
+          <h3 class="user-name">{{ user.name }}</h3>
+          <p class="user-id">ID: {{ user.id }}</p>
+          
+          <div class="user-info">
+            <div class="info-item">
+              <mat-icon class="info-icon">phone</mat-icon>
+              <span class="info-text">{{ user.phone }}</span>
+            </div>
+            <div class="info-item">
+              <mat-icon class="info-icon">email</mat-icon>
+              <span class="info-text">{{ user.email }}</span>
+            </div>
+            <div class="info-item">
+              <mat-icon class="info-icon">business</mat-icon>
+              <span class="info-text">{{ user.company.name }}</span>
+            </div>
+            <div class="info-item">
+              <mat-icon class="info-icon">location_on</mat-icon>
+              <span class="info-text">{{ user.address.city }}</span>
+            </div>
+          </div>
+          
+          <div class="user-role-badge" [ngClass]="user.role">
+            {{ user.role | titlecase }}
+          </div>
+        </div>
+        
+        <div class="user-card-footer">
+          <button mat-stroked-button class="view-profile-btn" (click)="openAdminDetails(user)">
+            <mat-icon>visibility</mat-icon>
+            View Profile
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Empty State -->
+    <div class="empty-state" *ngIf="filteredUsers.length === 0 && !isLoading">
+      <div class="empty-content">
+        <mat-icon class="empty-icon">people_outline</mat-icon>
+        <h3>No users found</h3>
+        <p *ngIf="searchQuery">No results for "{{ searchQuery }}"</p>
+        <p *ngIf="!searchQuery && (activeTab !== 'all' || selectedRole !== 'all')">
+          No {{ activeTab !== 'all' ? activeTab : '' }} {{ selectedRole !== 'all' ? selectedRole : '' }} users found
+        </p>
+        <button mat-button (click)="searchQuery = ''; setActiveTab('all'); setRoleFilter('all'); applyFilters()">
+          Clear filters
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

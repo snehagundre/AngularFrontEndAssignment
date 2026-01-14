@@ -1,0 +1,261 @@
+// /* ===== FIGMA TOKENS (VERY CLOSE) ===== */
+// $purple: #6a4bc3;
+// $text-dark: #1f2937;
+// $text-muted: #6b7280;
+// $bg-light: #faf9ff;
+// $border: #e5e7eb;
+
+// /* ===== STICKY HEADER ===== */
+// .header-wrapper {
+//   position: sticky;
+//   top: 0;
+//   z-index: 999;
+//   background: #ffffff;
+//   border-bottom: 1px solid $border;
+// }
+
+// /* ===== TOP BAR ===== */
+// .top-bar {
+//   display: flex;
+//   align-items: center;
+//   justify-content: space-between;
+//   padding: 12px 24px;
+// }
+
+// .left {
+//   display: flex;
+//   align-items: center;
+//   gap: 12px;
+// }
+
+// .logo {
+//   height: 34px;
+// }
+
+// .hostel-name {
+//   font-size: 14px;
+//   font-weight: 600;
+//   color: $text-dark;
+// }
+
+// .hostel-location {
+//   font-size: 12px;
+//   color: $text-muted;
+// }
+
+// /* ===== SEARCH ===== */
+// .search-wrapper {
+//   width: 280px;
+// }
+
+// .search-wrapper mat-form-field,
+// .mobile-search mat-form-field {
+//   width: 100%;
+// }
+
+// /* ===== RIGHT ===== */
+// .right {
+//   display: flex;
+//   align-items: center;
+//   gap: 12px;
+// }
+
+// .profile {
+//   display: flex;
+//   align-items: center;
+//   gap: 8px;
+// }
+
+// .avatar {
+//   width: 36px;
+//   height: 36px;
+//   border-radius: 50%;
+// }
+
+// .profile-info .name {
+//   font-size: 13px;
+//   font-weight: 600;
+// }
+
+// .profile-info .role {
+//   font-size: 11px;
+//   color: $text-muted;
+// }
+
+// /* ===== MOBILE SEARCH ===== */
+// .mobile-search {
+//   padding: 8px 16px;
+//   background: #ffffff;
+//   border-top: 1px solid $border;
+// }
+
+// /* ===== PAGE BAR ===== */
+// .page-bar {
+//   display: flex;
+//   justify-content: space-between;
+//   align-items: center;
+//   padding: 12px 24px;
+//   background: $bg-light;
+// }
+
+// .page-title {
+//   font-size: 15px;
+//   font-weight: 600;
+//   color: $purple;
+// }
+
+// .subtitle {
+//   font-size: 12px;
+//   color: #9ca3af;
+// }
+
+// /* ===== ADD USER DROPDOWN ===== */
+// .add-user-wrapper {
+//   position: relative;
+// }
+
+// .add-user-menu {
+//   position: absolute;
+//   right: 0;
+//   top: 42px;
+//   width: 170px;
+//   background: #ffffff;
+//   border-radius: 8px;
+//   box-shadow: 0 8px 24px rgba(0,0,0,.12);
+//   overflow: hidden;
+// }
+
+// .add-user-menu a {
+//   display: block;
+//   padding: 10px 14px;
+//   font-size: 13px;
+//   cursor: pointer;
+// }
+
+// .add-user-menu a:hover {
+//   background: #f4f1ff;
+// }
+
+// .top-bar {
+//   display: flex;
+//   justify-content: flex-end;
+//   padding: 12px 20px;
+//   background: #f5f7fb;
+// }
+
+// .right-actions {
+//   position: relative;
+// }
+
+// .add-btn {
+//   background: #2b6cff;
+//   color: #fff;
+//   border: none;
+//   padding: 8px 16px;
+//   border-radius: 6px;
+//   cursor: pointer;
+//   font-weight: 500;
+// }
+
+// .dropdown {
+//   position: absolute;
+//   top: 42px;
+//   right: 0;
+//   background: #fff;
+//   width: 160px;
+//   border-radius: 8px;
+//   box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+//   overflow: hidden;
+//   z-index: 1000;
+// }
+
+// .dropdown-item {
+//   padding: 10px 14px;
+//   cursor: pointer;
+//   font-size: 14px;
+// }
+
+// .dropdown-item:hover {
+//   background: #f0f4ff;
+// }
+.top-header {
+  padding: 12px 24px;
+  background: #ffffff;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+/* LOGO */
+.logo {
+  height: 34px;
+}
+
+/* HOSTEL INFO */
+.hostel-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: #1f2937;
+}
+
+.hostel-location {
+  font-size: 12px;
+  color: #6b7280;
+}
+
+/* SEARCH */
+.search-box {
+  width: 280px;
+}
+
+.search-box mat-form-field {
+  width: 100%;
+}
+
+/* PROFILE */
+.avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+}
+
+.user-name {
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.user-role {
+  font-size: 11px;
+  color: #6b7280;
+}
+.right-info {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.notification {
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.profile {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.profile img {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+}
+
+.name {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.role {
+  font-size: 12px;
+  color: #777;
+}
